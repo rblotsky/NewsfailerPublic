@@ -1,0 +1,14 @@
+{
+    // symbols that are auto closed when typing
+    "autoClosingPairs": [
+        ["__(", ")__"],
+        ["__[", "]__"],
+        ["[", "]"]
+    ],
+    // symbols that can be used to surround a selection
+    "surroundingPairs": [
+        ["__(", ")__"],
+        ["__[", "]__"],
+        ["[", "]"]
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "NewsfailerLang",
+    "patterns": [
+        {
+            "include": "#strings"
+        }
+    ],
+    "repository": {
+        "fillable": {
+            "patterns": [
+                {
+                    "name": "meta.fillable",
+                    "begin": "__\\(",
+                    "end": "\\)__",
+                    "patterns": [
+                        {
+                            "include": "#noun-definition"
+                        },
+                        {
+                            "include": "#fillable-separator"
+                        },
+                        {
+                            "name": "support.variable",
+                            "match": "[^,]+?"
+                        }
+                    ],
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control"
+                        }
+                    }
+                }
+            ]
+        },
+        "noun-definition": {
+            "patterns": [
+                {
+                    "name": "constant.character.escape",
+                    "match": "\\[\\w+\\]"
+                }
+            ]
+        },
+        "noun-insertion": {
+            "patterns": [
+                {
+                    "name": "meta.noun",
+                    "begin": "__\\[",
+                    "end": "\\]__",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape",
+                            "match": "\\w+"
+                        }
+                    ],
+                    "beginCaptures": {
+                        "0": {
+                            "name": "constant.character.escape"
+                        }
+                    },
+                    "endCaptures": {
+                        "0": {
+                            "name": "constant.character.escape"
+                        }
+                    }
+                }
+            ]
+        },
+        "fillable-separator": {
+            "patterns": [
+                {
+                    "name": "keyword.control",
+                    "match": ","
+                }
+            ]
+        },
+        "text-splitter": {
+            "patterns": [
+                {
+                    "name": "entity.name.tag",
+                    "match": "\\|"
+                }
+            ]
+        },
+        "title": {
+            "patterns": [
+                {
+                    "name": "entity.name.type",
+                    "match": "^\\$\\$\\$.*\\$\\$\\$\\s*"
+                }
+            ]
+        },
+        "issue-number": {
+            "patterns": [
+                {
+                    "name": "constant.regexp",
+                    "match": "^#.*"
+                }
+            ]
+        },
+        "date": {
+            "patterns": [
+                {
+                    "name": "constant.regexp",
+                    "match": "^@.*"
+                }
+            ]
+        },
+        "headline": {
+            "patterns": [
+                {
+                    "name": "entity.name.tag",
+                    "match": "^\\$\\$.*\\$\\$\\s*"
+                }
+            ]
+        },
+        "end": {
+            "patterns": [
+                {
+                    "name": "invalid",
+                    "match": "^\\$\\$\\$END\\$\\$\\$\\s*"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.unquoted",
+                    "begin": "^",
+                    "end": "$",
+                    "patterns": [
+                        {
+                            "include": "#text-splitter"
+                        },
+                        {
+                            "include": "#fillable"
+                        },
+                        {
+                            "include": "#noun-insertion"
+                        },
+                        {
+                            "include": "#end"
+                        },
+                        {
+                            "include": "#title"
+                        },
+                        {
+                            "include": "#issue-number"
+                        },
+                        {
+                            "include": "#date"
+                        },
+                        {
+                            "include": "#headline"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "scopeName": "source.newsfailerlang"
+}
